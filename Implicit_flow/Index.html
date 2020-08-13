@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>I am an App</title>
+
+  <link rel="stylesheet" href="https://taniarascia.github.io/primitive/css/main.css">
+</head>
+
+<body>
+
+    <div id="container">
+
+        <div id="APIclient">
+			
+			<form id="inputform">
+				<input required="" type="text" id="authorizeURL" placeholder="Authorization Endpoint">
+				<input required="" type="text" id="clientID" placeholder="Client ID">
+				<input required="" type="text" id="redirectURI" placeholder="Redirect URI (example: http://localhost/index.html)">
+				<input required="" type="text" id="state" placeholder="State (Random variables)">
+				<input required="" type="text" id="nonce" placeholder="Nonce (Random variables)">
+				<input required="" type="text" id="scope" placeholder="Scopes seperated by + (example: onlineid+..)">
+				<input type="submit" value="Save values">
+			</form>
+
+            <button id="Loginbutton">Login</button> 
+			<br>
+
+            <script type="text/javascript">
+			
+			//Loginbutton
+				document.getElementById("Loginbutton").onclick = function ()
+				{
+					location.href = authorizeURL.value + "?client_id=" + clientID.value + "&redirect_uri=" + redirectURI.value +"&state=" + state.value + "&nonce=" + nonce.value + "&scope=" + scope.value + "&response_type=token";
+				}
+			
+			//Fragment
+				var frag = window.location.hash;
+				var newfrag = frag.replace("#","");
+				newfrag = newfrag.split("&");
+			
+			//Viewing variables			
+				var i;
+				if (frag <= 1)
+					{
+						document.write("<h1>" + "Make sure to fill in the values and then press 'Login'" + "</h1>")
+					}
+				
+				else
+					{
+					//Variables
+					document.write("<h1>" + "Below is the variables used to login in.." + "</h1>")
+					
+					for (i=0; i<5; i++)
+						{
+						var mi = document.createElement("input");
+						mi.setAttribute('type', 'text');
+						mi.setAttribute('value', newfrag[i].replace("=", " = "));
+						
+						document.body.appendChild(mi);
+						}
+					}
+
+            </script>
+        </div>
+
+    </div>
+
+</body>
+</html>
